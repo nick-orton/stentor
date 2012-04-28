@@ -17,17 +17,19 @@ var server = http.createServer(function (request, response) {
       collection.find().toArray(function(err, numbers) {
 
         //do stuff with the numbers here
-        tropo.say("Hello, World.");
+        tropo.say("Hello, World." + numbers);
         tropo.hangup();
 
         client.close();
+        response.writeHead(200, {'Content-Type': 'application/json'});
+
+        response.end(tropowebapi.TropoJSON(tropo));
+
+
       });
     });
   });
 
 
   // Render out the JSON for Tropo to consume.
-  response.writeHead(200, {'Content-Type': 'application/json'});
-  response.end(tropowebapi.TropoJSON(tropo));
-
 }).listen(8123);
