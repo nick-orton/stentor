@@ -1,13 +1,30 @@
 var tropowebapi = require('tropo-webapi');
 var http = require('http');
+var Db = require('mongodb').Db;
+var Server = require('mongodb').Server;
+
+var client = new Db('muppetsdb', new Server('127.0.0.1', 27017));
+
 
 
 
 var server = http.createServer(function (request, response) {
 
   var tropo = new tropowebapi.TropoWebAPI();
-  tropo.say("Hello, World.");
-  tropo.hangup();
+
+  client.open(function(err, pClient) {
+    client.collection('muppets', function(err, collection) {
+      collection.find().toArray(function(err, numbers) {
+
+        //do stuff with the numbers here
+        tropo.say("Hello, World.");
+        tropo.hangup();
+
+        client.close();
+      });
+    });
+  });
+
 
   // Render out the JSON for Tropo to consume.
   response.writeHead(200, {'Content-Type': 'application/json'});
