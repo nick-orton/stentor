@@ -7,7 +7,9 @@
     "type": "git",
     "url": "git://github.com/nick-orton/stentor.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "tropo-webapi" : "1.0.x"
+  },
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
