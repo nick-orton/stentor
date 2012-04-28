@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "tropo-webapi" : "1.0.x"
-    , "tropo-webapi" : "1.0.x"
+    , "mongodb" : "1.0.x"
 
   },
   "devDependencies": {},
