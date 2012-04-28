@@ -1,7 +1,7 @@
 stentor
 =======
 
-## you need another group chat like you need a hole in the head
+### you need another group chat like you need a hole in the head
 
 I used to use a group chat application that shall remain nameless.  I was looking at their privacy policy
 and noticed that it didn't say: "We promise not to keep the contents of your messages forever and sell 
