@@ -1,0 +1,16 @@
+{
+  "author": "nick orton <nick@orton.biz> (orton.biz)",
+  "name": "stentor",
+  "description": "you need another group chat like you need a hole in the head",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nick-orton/stentor.git"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
