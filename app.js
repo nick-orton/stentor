@@ -10,26 +10,34 @@ var client = new Db('muppetsdb', new Server('127.0.0.1', 27017));
 
 var server = http.createServer(function (request, response) {
 
-  var tropo = new tropowebapi.TropoWebAPI();
+  request.addListener('data', function(data){
+         json = data.toString();
+  });
 
-  client.open(function(err, pClient) {
-    client.collection('muppets', function(err, collection) {
-      collection.find().toArray(function(err, numbers) {
-        client.close(); //we don't need no open connections
+  request.addListener('end', function() {
+    var tropo = new tropowebapi.TropoWebAPI();
+    var session = JSON.parse(json);
 
-        //do stuff with the numbers here
-        tropo.say("Hello, World." + numbers);
-        tropo.hangup();
+    var message = session.session.initialText;
+    var caller = session.session.from.id;
 
-        response.writeHead(200, {'Content-Type': 'application/json'});
+    client.open(function(err, pClient) {
+      client.collection('muppets', function(err, collection) {
+        collection.find().toArray(function(err, numbers) {
+          client.close(); //we don't need no open connections
 
-        response.end(tropowebapi.TropoJSON(tropo));
+          //do stuff with the numbers here
+          tropo.say("Hello, " + caller + ":" + message + numbers);
+          tropo.hangup();
+
+          response.writeHead(200, {'Content-Type': 'application/json'});
+
+          response.end(tropowebapi.TropoJSON(tropo));
 
 
+        });
       });
     });
   });
 
-
-  // Render out the JSON for Tropo to consume.
 }).listen(8123);
